@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   CheckCircle2,
   Circle,
@@ -69,7 +70,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
       regex.test(part) ? (
         <mark
           key={i}
-          className="bg-[#FFF7ED] text-[#C2410C] font-semibold rounded px-1 py-0.2 border-b-2 border-[#FF5722]"
+          className="bg-[#FFF7ED] text-[#C2410C] font-semibold rounded px-1 py-0.2 border-b-2 border-[#F97316]"
         >
           {part}
         </mark>
@@ -102,7 +103,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
           }`}
         >
           {isBullet && (
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] shrink-0 mt-2" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#F97316] shrink-0 mt-2" />
           )}
           <span className="flex-1 whitespace-pre-wrap">{highlightMatch(content)}</span>
         </div>
@@ -111,7 +112,10 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   };
 
   return (
-    <article
+    <motion.article
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
       className={`group relative rounded-3xl bg-white border transition-all duration-200 shadow-sm hover:shadow-md print-page-break ${
         isMastered
           ? 'border-emerald-200 ring-1 ring-emerald-500/20'
@@ -134,7 +138,8 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
           {/* Action Buttons: Bookmark & Mastered Checkbox */}
           <div className="flex items-center gap-2 no-print">
             {/* Bookmark button */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={() => onToggleBookmark(question.id)}
               className={`p-1.5 rounded-full transition-colors cursor-pointer ${
                 isBookmarked
@@ -145,10 +150,11 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
               aria-label="Bookmark question"
             >
               <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-amber-500 text-amber-600' : ''}`} strokeWidth={1.75} />
-            </button>
+            </motion.button>
 
             {/* Copy Note Button */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={handleCopyAll}
               className="p-1.5 rounded-full text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
               title="Copy Q&A Note"
@@ -159,10 +165,12 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
               ) : (
                 <Copy className="w-4 h-4" strokeWidth={1.75} />
               )}
-            </button>
+            </motion.button>
 
             {/* Mark as Mastered Pill Button */}
-            <button
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.96 }}
               onClick={() => onToggleMastered(question.id)}
               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 isMastered
@@ -182,7 +190,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                   <span>Review</span>
                 </>
               )}
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -210,7 +218,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
       <div className="px-5 sm:px-6 py-2.5 bg-slate-50/70 flex items-center justify-between border-b border-slate-100 no-print">
         <button
           onClick={() => onToggleExpand(question.id)}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800 hover:text-[#FF5722] transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800 hover:text-[#F97316] transition-colors cursor-pointer"
         >
           {isExpanded ? (
             <>
@@ -230,57 +238,66 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
         </span>
       </div>
 
-      {/* Answer Content Body */}
-      <div
-        className={`px-5 sm:px-6 py-4 transition-all duration-200 ${
-          isExpanded ? 'block' : 'hidden print:block'
-        }`}
-      >
-        <div className="space-y-3">
-          {/* Answer Text Box */}
-          <div className="bg-[#F8FAFC] rounded-2xl p-4 sm:p-5 border border-slate-200/90">
-            <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-[#2563EB] uppercase tracking-wider mb-2.5">
-              <FileCheck className="w-4 h-4 text-[#FF5722]" strokeWidth={1.75} />
-              <span>[ Standard Answer // Exam Guideline ]</span>
-            </div>
-            <div className="space-y-1">
-              {renderFormattedAnswer(question.answer)}
-            </div>
-          </div>
-
-          {/* SQL Syntax & Code Example Block */}
-          {question.codeExample && (
-            <div className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 text-slate-100 text-xs sm:text-sm">
-              <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900 border-b border-slate-800">
-                <div className="flex items-center gap-2 text-slate-400 text-xs font-mono">
-                  <Code2 className="w-3.5 h-3.5 text-indigo-400" strokeWidth={1.75} />
-                  <span>Oracle SQL Practice Query</span>
+      {/* Answer Content Body with Smooth Framer Motion Accordion Reveal */}
+      <AnimatePresence initial={false}>
+        {isExpanded && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 sm:px-6 py-4 space-y-3">
+              {/* Answer Text Box */}
+              <div className="bg-[#F8FAFC] rounded-2xl p-4 sm:p-5 border border-slate-200/90">
+                <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-[#2563EB] uppercase tracking-wider mb-2.5">
+                  <FileCheck className="w-4 h-4 text-[#F97316]" strokeWidth={1.75} />
+                  <span>[ Standard Answer // Exam Guideline ]</span>
                 </div>
-                <button
-                  onClick={handleCopyCode}
-                  className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
-                  title="Copy SQL Example"
-                >
-                  {copiedCode ? (
-                    <>
-                      <Check className="w-3 h-3 text-emerald-400" strokeWidth={1.75} />
-                      <span className="text-emerald-400">Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3 h-3" strokeWidth={1.75} />
-                      <span>Copy SQL</span>
-                    </>
-                  )}
-                </button>
+                <div className="space-y-1">
+                  {renderFormattedAnswer(question.answer)}
+                </div>
               </div>
-              <pre className="p-4 overflow-x-auto font-mono text-xs sm:text-[13px] leading-relaxed text-indigo-200">
-                <code>{question.codeExample}</code>
-              </pre>
+
+              {/* SQL Syntax & Code Example Block */}
+              {question.codeExample && (
+                <div className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 text-slate-100 text-xs sm:text-sm">
+                  <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900 border-b border-slate-800">
+                    <div className="flex items-center gap-2 text-slate-400 text-xs font-mono">
+                      <Code2 className="w-3.5 h-3.5 text-indigo-400" strokeWidth={1.75} />
+                      <span>Oracle SQL Practice Query</span>
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleCopyCode}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                      title="Copy SQL Example"
+                    >
+                      {copiedCode ? (
+                        <>
+                          <Check className="w-3 h-3 text-emerald-400" strokeWidth={1.75} />
+                          <span className="text-emerald-400">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3" strokeWidth={1.75} />
+                          <span>Copy SQL</span>
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
+                  <pre className="p-4 overflow-x-auto font-mono text-xs sm:text-[13px] leading-relaxed text-indigo-200">
+                    <code>{question.codeExample}</code>
+                  </pre>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
-    </article>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.article>
   );
 };

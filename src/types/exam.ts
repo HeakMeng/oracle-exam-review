@@ -12,11 +12,12 @@ export interface MCQQuestion {
   id: number;
   chapter: string;
   question: string;
-  codeSnippet?: string;
+  codeSnippet?: string | null;
   options: string[];
   correctIndex: number;
-  explanation: string;
-  category: 'group_functions' | 'joins' | 'subqueries' | 'set_dml_ddl';
+  standardAnswer: string;
+  explanation?: string;
+  category?: 'group_functions' | 'joins' | 'subqueries' | 'set_dml_ddl';
 }
 
 export type ChapterFilter = 
@@ -28,4 +29,15 @@ export type ChapterFilter =
 
 export type StatusFilter = 'all' | 'mastered' | 'unmastered' | 'bookmarked';
 
-export type ActivePlatformTab = 'study_guide' | 'mcq_test';
+export type ActivePlatformTab = 'study_guide' | 'practice' | 'exam_mode';
+
+export type SelfGradeStatus = 'match' | 'review' | 'unrated';
+
+export interface WrittenExamState {
+  answers: Record<number, string>;
+  selfGrades: Record<number, SelfGradeStatus>;
+  timeRemainingSeconds: number;
+  isSubmitted: boolean;
+  isStarted: boolean;
+  timeTakenSeconds: number;
+}

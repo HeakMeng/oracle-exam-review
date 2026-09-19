@@ -4,315 +4,309 @@ export const mcqQuestions: MCQQuestion[] = [
   {
     id: 1,
     chapter: "Lesson 5: Group Functions",
-    category: "group_functions",
-    question: "តើអ្វីទៅជានិយមន័យត្រឹមត្រូវរបស់ Group Function (ឬ Aggregate Function)?",
+    question: "តើអ្វីទៅជា Group Function? ចូរប្រាប់ពីឈ្មោះនៃ Group Function និងប្រាប់ពីតួនាទីរបស់វា។",
+    codeSnippet: "SELECT COUNT(*), AVG(salary), MAX(salary) FROM employees;",
     options: [
-      "Function ដែលទទួលយកទិន្នន័យពីច្រើនជួរ (Multiple Rows) មកគណនា និងផ្ដល់លទ្ធផលត្រឡប់មកវិញត្រឹមតែតម្លៃមួយជួរគត់ (Single Result)",
-      "Function ដែលដំណើរការលើមួយជួរម្ដងៗ និងផ្ដល់លទ្ធផលមួយជួរសម្រាប់គ្រប់ Row ទាំងអស់",
-      "Function សម្រាប់ផ្លាស់ប្ដូរប្រភេទ Data Type ពី VARCHAR2 ទៅជា NUMBER",
-      "Function សម្រាប់តម្រៀបទិន្នន័យ (Sorting) តាមលំដាប់លំដោយពីតូចទៅធំ"
+      "អនុគមន៍ដែលទទួលយកទិន្នន័យច្រើនជួរ (Multiple Rows) មកគណនា និងផ្ដល់លទ្ធផលត្រឡប់មកវិញជាតម្លៃមួយជួរគត់",
+      "អនុគមន៍ដែលដំណើរការលើជួរមួយៗ និងផ្ដល់លទ្ធផលមួយសម្រាប់គ្រប់ Row ទាំងអស់",
+      "អនុគមន៍សម្រាប់ប្ដូរប្រភេទ Data Type ពី VARCHAR2 ទៅជា NUMBER",
+      "អនុគមន៍សម្រាប់តម្រៀបទិន្នន័យ (Sorting) តាមលំដាប់លំដោយពីតូចទៅធំ"
     ],
     correctIndex: 0,
-    explanation: "Group Function (Aggregate Function) ទទួល Multiple Rows មកធ្វើការបូកសរុប ឬគណនា (ដូចជា COUNT, SUM, AVG, MIN, MAX) ហើយផ្ដល់តម្លៃត្រឡប់មកវិញត្រឹមតែតម្លៃ Single Result ប៉ុណ្ណោះសម្រាប់ក្រុមទិន្នន័យនីមួយៗ។",
-    codeSnippet: "SELECT COUNT(*), AVG(salary), MAX(salary) FROM employees;"
+    standardAnswer: "Group Function (Aggregate Function) គឺជាអនុគមន៍ដែលទទួលយកទិន្នន័យពីច្រើនជួរ (Multiple Rows) មកគណនា និងផ្ដល់លទ្ធផលត្រឡប់មកវិញជាតម្លៃមួយជួរគត់។\n• COUNT(): រាប់ចំនួន Rows ឬតម្លៃដែលមិនមែនជា NULL\n• SUM(): គណនាផលបូកសរុប\n• AVG(): គណនាតម្លៃមធ្យម\n• MIN(): តម្លៃតូចបំផុត\n• MAX(): តម្លៃធំបំផុត"
   },
   {
     id: 2,
     chapter: "Lesson 5: Group Functions",
-    category: "group_functions",
-    question: "តើ GROUP BY Clause ត្រូវបានប្រើប្រាស់សម្រាប់គោលបំណងអ្វីនៅក្នុង SQL?",
+    question: "តើ GROUP BY Clause ប្រើសម្រាប់ធ្វើអ្វី?",
+    codeSnippet: "SELECT department_id, AVG(salary) FROM employees GROUP BY department_id;",
     options: [
-      "សម្រាប់លុបជួរទិន្នន័យស្ទួន (Duplicates) ចេញពីលទ្ធផល query",
-      "សម្រាប់បែងចែកជួរទិន្នន័យ (Rows) ទៅជាក្រុមតូចៗ (Groups) ផ្អែកលើតម្លៃ Column ដើម្បីឱ្យ Group Function គណនាតាមក្រុមនីមួយៗ",
-      "សម្រាប់កំណត់លក្ខខណ្ឌ Filter លើទិន្នន័យមុនពេលគណនាផលបូក",
-      "សម្រាប់តម្រៀបទិន្នន័យតាមអក្ខរក្រមពី A ដល់ Z តែប៉ុណ្ណោះ"
+      "ប្រើសម្រាប់ Filter ជួរទិន្នន័យនីមួយៗមុនពេល Select",
+      "ប្រើសម្រាប់បែងចែក Rows ជាក្រុមៗ ដើម្បីអនុវត្ត Group Function លើក្រុមនីមួយៗ",
+      "ប្រើសម្រាប់តម្រៀបជួរទិន្នន័យពីធំទៅតូច",
+      "ប្រើសម្រាប់ Join តារាងពីរដែលមាន Column ដូចគ្នា"
     ],
     correctIndex: 1,
-    explanation: "GROUP BY clause ប្រើសម្រាប់ចែកទិន្នន័យជាក្រុមៗតាម Column ជាក់លាក់ ដើម្បីឱ្យ Aggregate Functions (ដូចជា AVG, SUM, COUNT) អាចគណនាតម្លៃដាច់ដោយឡែកពីគ្នាសម្រាប់ក្រុមនីមួយៗ។",
-    codeSnippet: "SELECT department_id, AVG(salary) FROM employees GROUP BY department_id;"
+    standardAnswer: "GROUP BY Clause ប្រើសម្រាប់បែងចែក Rows ជាក្រុមៗ (Groups) ដោយផ្អែកលើតម្លៃក្នុង Column មួយ ឬច្រើន ដើម្បីអនុវត្ត Group Function លើក្រុមនីមួយៗ。"
   },
   {
     id: 3,
     chapter: "Lesson 5: Group Functions",
-    category: "group_functions",
-    question: "តើ HAVING Clause មានតួនាទីខុសពី WHERE Clause ដូចម្ដេច?",
+    question: "ចូរប្រាប់ពីតួនាទីរបស់ HAVING Clause?",
+    codeSnippet: "SELECT department_id, AVG(salary) FROM employees GROUP BY department_id HAVING AVG(salary) > 5000;",
     options: [
-      "HAVING ប្រើសម្រាប់ Filter ជួរទិន្នន័យនីមួយៗ (Individual rows) មុនពេល GROUP BY",
-      "HAVING ប្រើសម្រាប់ Filter លើក្រុមទិន្នន័យ (Aggregated Groups) ក្រោយពេល GROUP BY និងអាចប្រើជាមួយ Group Functions បាន",
-      "HAVING អាចប្រើប្រាស់បានតែជាមួយ Single-row Subqueries ប៉ុណ្ណោះ",
-      "HAVING មិនអនុញ្ញាតឱ្យប្រើប្រាស់ Group Functions ដូចជា SUM() ឬ AVG() ឡើយ"
+      "Filter ទិន្នន័យលើជួរនីមួយៗមុនពេលបង្កើតក្រុម",
+      "ជំនួសឱ្យពាក្យបញ្ជា WHERE ក្នុងគ្រប់កាលៈទេសៈ",
+      "Filter លើ Groups បន្ទាប់ពីការបែងចែកតាម GROUP BY ហើយអាចប្រើជាមួយ Group Function បាន",
+      "ប្រើសម្រាប់បង្កើត Table ថ្មីនៅក្នុង Schema"
     ],
-    correctIndex: 1,
-    explanation: "HAVING clause ត្រូវបានបង្កើតឡើងជាពិសេសដើម្បី Filter លើលទ្ធផល Aggregate Groups (ក្រោយពេល GROUP BY រួច) ហើយអាចប្រើជាមួយ Group Functions ដូចជា HAVING AVG(salary) > 5000 បាន ខណៈ WHERE មិនអាចប្រើជាមួយ Group Functions បានឡើយ។",
-    codeSnippet: "SELECT department_id, AVG(salary)\nFROM employees\nGROUP BY department_id\nHAVING AVG(salary) > 5000;"
+    correctIndex: 2,
+    standardAnswer: "HAVING Clause ប្រើសម្រាប់ Filter លើ Groups បន្ទាប់ពីការបែងចែកតាម GROUP BY រួច ហើយត្រូវបានបង្កើតឡើងដើម្បីប្រើជាមួយ Group Functions (ឧ. HAVING AVG(salary) > 5000)。"
   },
   {
     id: 4,
     chapter: "Lesson 5: Group Functions",
-    category: "group_functions",
-    question: "នៅក្នុង SQL Statement មួយដែលមានទាំង WHERE និង HAVING clause តើ clause មួយណាដំណើរការមុន?",
+    question: "ចូរប្រៀបធៀបរវាង HAVING Clause និង WHERE Clause",
+    codeSnippet: null,
     options: [
-      "HAVING ដំណើរការមុន រួចទើប WHERE ដំណើរការជាក្រោយ",
-      "WHERE ដំណើរការមុនដើម្បី Filter individual rows មុនពេលទិន្នន័យត្រូវចែកក្រុមដោយ GROUP BY",
-      "ទាំងពីរដំណើរការដំណាលគ្នាក្នុងពេលតែមួយ",
-      "លំដាប់លំដោយគឺអាស្រ័យលើ clause ណាដែលសរសេរនៅខាងមុខគេ"
+      "WHERE ប្រើលើ Groups ចំណែក HAVING ប្រើលើ Individual Rows",
+      "WHERE Filter លើ Individual Rows មុនពេល GROUP BY, រីឯ HAVING Filter លើ Groups ក្រោយ GROUP BY និងអាចប្រើជាមួយ Group Functions បាន",
+      "WHERE មិនអាចប្រើក្នុង SELECT Statement បានទេ",
+      "HAVING ដំណើរការលឿនជាង WHERE ជានិច្ចព្រោះមិនបាច់ឆែកលក្ខខណ្ឌ"
     ],
     correctIndex: 1,
-    explanation: "លំដាប់ដំណើរការ៖ WHERE clause នឹង Filter ជួរទិន្នន័យនីមួយៗមុនគេ បន្ទាប់មកទើប GROUP BY បែងចែកជាក្រុម ហើយចុងក្រោយ HAVING ទើប Filter លើក្រុម Aggregate ទាំងនោះ។"
+    standardAnswer: "• WHERE Clause: Filter លើ Individual Rows មុនពេល GROUP BY និងមិនអាចប្រើជាមួយ Group Functions ដូចជា SUM(), AVG() បានឡើយ。\n• HAVING Clause: Filter លើ Groups ក្រោយពេល GROUP BY និងអាចប្រើជាមួយ Group Functions បាន。"
   },
   {
     id: 5,
     chapter: "Lesson 5: Group Functions",
-    category: "group_functions",
-    question: "នៅក្នុង Oracle SQL តើ Nesting Group Functions អាចដាក់បង្កប់បានអតិបរមាចំនួនប៉ុន្មានកម្រិត (Levels)?",
+    question: "នៅក្នុង Oracle SQL តើ Group Functions អាចធ្វើ Nesting បានប៉ុន្មានកម្រិត (Levels)?",
+    codeSnippet: "SELECT MAX(AVG(salary)) FROM employees GROUP BY department_id;",
     options: [
-      "១ កម្រិតប៉ុណ្ណោះ",
-      "២ កម្រិត (2 levels deep) និងត្រូវតែមានវត្តមានរបស់ GROUP BY clause",
-      "៣ កម្រិត (3 levels deep)",
-      "គ្មានដែនកំណត់កម្រិតឡើយ"
+      "បានតែ ១ កម្រិតប៉ុណ្ណោះ",
+      "បានអតិបរមា ២ កម្រិត (2 levels deep) ហើយត្រូវមាន GROUP BY Clause",
+      "បានរហូតដល់ ៥ កម្រិតដោយសេរី",
+      "មិនអាចធ្វើ Nesting បានដាច់ខាត"
     ],
     correctIndex: 1,
-    explanation: "Oracle SQL អនុញ្ញាតឱ្យ Nest Group Functions (ឧ. MAX(AVG(salary))) បានអតិបរមាត្រឹមតែ ២ កម្រិត (2 levels deep) ប៉ុណ្ណោះ ហើយចាំបាច់ត្រូវតែមាន GROUP BY clause អមជាមួយ។",
-    codeSnippet: "SELECT MAX(AVG(salary)) FROM employees GROUP BY department_id;"
+    standardAnswer: "នៅក្នុង Oracle SQL អាចធ្វើ Nesting Group Functions (ឧទាហរណ៍៖ MAX(AVG(salary))) បានអតិបរមាត្រឹមតែ 2 Levels ប៉ុណ្ណោះ ហើយចាំបាច់ត្រូវតែមាន GROUP BY Clause。"
   },
   {
     id: 6,
     chapter: "Lesson 6: Joins",
-    category: "joins",
-    question: "តើ NATURAL JOIN ដំណើរការផ្គូផ្គងតារាងដោយផ្អែកលើលក្ខខណ្ឌអ្វី?",
+    question: "តើ Natural Join ដំណើរការដោយរបៀបណា?",
+    codeSnippet: "SELECT * FROM employees NATURAL JOIN departments;",
     options: [
-      "ផ្អែកលើ Column ណាដែលមានឈ្មោះដូចគ្នា និងមាន Data Type ត្រូវគ្នាក្នុងតារាងទាំងពីរដោយស្វ័យប្រវត្តិ",
-      "ផ្អែកលើ Primary Key និង Foreign Key តែមួយគត់",
-      "ផ្អែកលើលក្ខខណ្ឌដែលកំណត់ក្នុង ON clause ជានិច្ច",
-      "ផ្អែកលើ Column ទីមួយនៃតារាងទាំងសងខាងដោយមិនខ្វល់ពីឈ្មោះ"
+      "Join តារាងទាំងពីរដោយស្វ័យប្រវត្តិតាមរយៈ Columns ដែលមានឈ្មោះដូចគ្នា និង Data Type ត្រូវគ្នា ដោយមិនបាច់សរសេរ ON ឬ USING",
+      "តម្រូវឱ្យសរសេរបញ្ជាក់ Primary Key និង Foreign Key ជានិច្ចតាមរយៈ ON clause",
+      "បង្កើត Cartesian Product ដោយផ្គូផ្គងគ្រប់ Rows ទាំងអស់",
+      "Join តែតារាងណាដែលមានចំនួន Column ស្មើគ្នាទាំងស្រុង"
     ],
     correctIndex: 0,
-    explanation: "NATURAL JOIN ផ្គូផ្គង Columns ដែលមានឈ្មោះដូចគ្នា (Same Name) និង Data Type Compatible នៅក្នុងតារាងទាំងពីរដោយស្វ័យប្រវត្តិ ដោយអ្នកសរសេរមិនបាច់បញ្ជាក់ ON ឬ USING ឡើយ។",
-    codeSnippet: "SELECT department_name, city FROM departments NATURAL JOIN locations;"
+    standardAnswer: "NATURAL JOIN គឺជាការ Join តារាងពីរដោយស្វ័យប្រវត្តិ ដោយ Oracle ជ្រើសរើស Columns ដែលមានឈ្មោះដូចគ្នា និង Data Type ត្រូវគ្នាពីតារាងទាំងពីរ ដោយមិនបាច់សរសេរ ON ឬ USING ឡើយ。"
   },
   {
     id: 7,
     chapter: "Lesson 6: Joins",
-    category: "joins",
-    question: "តើអ្វីជាលក្ខណៈសម្គាល់ចម្បងនៃ Self-Join?",
+    question: "តើអ្វីជា Self-Join?",
+    codeSnippet: "SELECT e.last_name, m.last_name FROM employees e JOIN employees m ON (e.manager_id = m.employee_id);",
     options: [
-      "ជាការភ្ជាប់តារាងពីរផ្សេងគ្នាដែលមាន Structure ដូចគ្នាទាំងស្រុង",
-      "ជាការភ្ជាប់តារាងមួយទៅកាន់ខ្លួនឯងផ្ទាល់ (Join a table to itself) ដោយប្រើ Table Aliases ផ្សេងគ្នា",
-      "ជាការ Join ដោយមិនប្រើប្រាស់ Comparison Operators",
-      "ជាការផ្គូផ្គងរាល់ជួរទាំងអស់ដើម្បីបង្កើត Cartesian Product"
+      "ការ Join តារាងមួយទៅកាន់ User Profile របស់ Database",
+      "ការភ្ជាប់តារាងមួយទៅនឹងខ្លួនឯងផ្ទាល់ (Join a table to itself) ដោយប្រើ Table Aliases ខុសគ្នា",
+      "ការច្របាច់ទិន្នន័យពី Database ពីរផ្សេងគ្នា",
+      "ការលុបជួរស្ទួនចេញពីតារាងដោយស្វ័យប្រវត្តិ"
     ],
     correctIndex: 1,
-    explanation: "Self-Join គឺជាការភ្ជាប់តារាងមួយទៅកាន់ខ្លួនឯងផ្ទាល់ (ឧទាហរណ៍៖ employees e ភ្ជាប់ជាមួយ employees m) ដើម្បីស្វែងរកទំនាក់ទំនងរវាងបុគ្គលិក និងអ្នកគ្រប់គ្រង (Manager) ក្នុងតារាងតែមួយ។",
-    codeSnippet: "SELECT e.last_name, m.last_name FROM employees e JOIN employees m ON (e.manager_id = m.employee_id);"
+    standardAnswer: "Self-Join គឺជាការ Join តារាងមួយទៅនឹងខ្លួនឯងផ្ទាល់ ដើម្បីប្រៀបធៀប ឬភ្ជាប់ទិន្នន័យក្នុងតារាងដដែល ដោយប្រើ Table Aliases ផ្សេងគ្នា (ឧទាហរណ៍៖ employees e សម្រាប់បុគ្គលិក និង employees m សម្រាប់ Manager)。"
   },
   {
     id: 8,
     chapter: "Lesson 6: Joins",
-    category: "joins",
-    question: "តើអ្វីទៅជា Non-equijoin នៅក្នុង Oracle SQL?",
+    question: "តើអ្វីជាលក្ខណៈពិសេសរបស់ Non-equijoin?",
+    codeSnippet: "SELECT e.last_name, e.salary, j.grade_level FROM employees e JOIN job_grades j ON e.salary BETWEEN j.lowest_sal AND j.highest_sal;",
     options: [
-      "ការ Join ដែលលក្ខខណ្ឌភ្ជាប់ប្រើប្រាស់សញ្ញាស្មើ (=)",
-      "ការ Join ដែលលក្ខខណ្ឌភ្ជាប់មិនប្រើប្រាស់សញ្ញាស្មើ (=) ឡើយ ប៉ុន្តែប្រើ Comparison Operators ដូចជា <, >, <=, >=, ឬ BETWEEN",
-      "ការ Join ដែលតារាងទាំងពីរគ្មាន Column ឈ្មោះដូចគ្នា",
-      "ការ Join ដែលផ្ដល់ផលត្រឡប់មកវិញត្រឹមតែ NULL values"
+      "ប្រើតែសញ្ញាស្មើ (=) ប៉ុណ្ណោះក្នុងការភ្ជាប់",
+      "លក្ខខណ្ឌ Join មិនប្រើសញ្ញាស្មើ (=) ទេ ប៉ុន្តែប្រើសញ្ញាដូចជា <, >, <=, >=, ឬ BETWEEN ... AND ...",
+      "Join បានតែលើ Table ដែលគ្មាន Index",
+      "ជាការ Join ដោយមិនប្រើប្រាស់ Column ណាមួយទាំងអស់"
     ],
     correctIndex: 1,
-    explanation: "Non-equijoin គឺជាការ Join ដែលលក្ខខណ្ឌមិនប្រើប្រាស់សញ្ញា (=) ប៉ុន្តែប្រើ comparison operators ផ្សេងទៀត ដូចជាការផ្គូផ្គងប្រាក់ខែ salary BETWEEN lowest_sal AND highest_sal នៃតារាង job_grades។"
+    standardAnswer: "Non-equijoin គឺជា Join condition ដែលមិនប្រើសញ្ញាស្មើ (=) ក្នុងការភ្ជាប់តារាង ប៉ុន្តែប្រើ Comparison Operators ផ្សេងទៀតដូចជា <, >, <=, >=, ឬ BETWEEN ... AND ... (ឧ. ផ្គូផ្គងប្រាក់ខែទៅ Job Grade)。"
   },
   {
     id: 9,
     chapter: "Lesson 6: Joins",
-    category: "joins",
-    question: "ប្រសិនបើយើងចង់បង្ហាញរាល់បុគ្គលិកទាំងអស់ ទោះបីជាបុគ្គលិកនោះមិនទាន់មាន Department ក៏ដោយ តើយើងគួរប្រើ Join ប្រភេទណា?",
+    question: "តើ Outer Join ប្រភេទណាដែលបង្ហាញគ្រប់ Rows ទាំងអស់ពីតារាងខាងឆ្វេង ទោះបីជាគ្មានទិន្នន័យត្រូវគ្នានៅតារាងខាងស្ដាំក៏ដោយ?",
+    codeSnippet: "SELECT e.last_name, d.department_name FROM employees e LEFT OUTER JOIN departments d ON (e.department_id = d.department_id);",
     options: [
-      "INNER JOIN",
-      "LEFT OUTER JOIN (ដោយយក Employees ជាតារាងខាងឆ្វេង)",
-      "CROSS JOIN",
-      "NATURAL JOIN"
+      "RIGHT OUTER JOIN",
+      "LEFT OUTER JOIN",
+      "FULL OUTER JOIN",
+      "CROSS JOIN"
     ],
     correctIndex: 1,
-    explanation: "LEFT OUTER JOIN នឹងទាញយកគ្រប់ជួរទាំងអស់ពីតារាងខាងឆ្វេង (Employees) ទោះបីជាគ្មានជួរផ្គូផ្គងត្រូវគ្នាក្នុងតារាងខាងស្ដាំ (Departments) ក៏ដោយ ដោយបំពេញតម្លៃដែលខ្វះដោយ NULL។"
+    standardAnswer: "LEFT OUTER JOIN ប្រើសម្រាប់បង្ហាញគ្រប់ Rows ទាំងអស់ពីតារាងខាងឆ្វេង បើទោះជាគ្មានទិន្នន័យត្រូវគ្នានៅតារាងខាងស្ដាំក៏ដោយ ដោយបំពេញតម្លៃដែលខ្វះដោយ NULL。"
   },
   {
     id: 10,
     chapter: "Lesson 6: Joins",
-    category: "joins",
-    question: "ប្រសិនបើតារាង A មាន ២០ ជួរ ហើយតារាង B មាន ៥ ជួរ តើលទ្ធផលនៃ CROSS JOIN រវាងតារាងទាំងពីរមានចំនួនប៉ុន្មានជួរ?",
+    question: "ប្រសិនបើតារាង A មាន 5 rows ហើយតារាង B មាន 10 rows តើ Cross Join នឹងផ្ដល់លទ្ធផលប៉ុន្មាន rows?",
+    codeSnippet: "SELECT * FROM table_a CROSS JOIN table_b;",
     options: [
-      "២៥ ជួរ",
-      "១០០ ជួរ (Cartesian Product: 20 * 5)",
-      "២០ ជួរ",
-      "៤ ជួរ"
+      "15 rows",
+      "5 rows",
+      "50 rows (Cartesian Product: 5 × 10)",
+      "10 rows"
     ],
-    correctIndex: 1,
-    explanation: "CROSS JOIN បង្កើត Cartesian Product ដែលរាល់គ្រប់ជួរនៃតារាងទីមួយផ្គូផ្គងនឹងរាល់គ្រប់ជួរនៃតារាងទីពីរ ដូច្នេះផលសរុបគឺ m * n = 20 * 5 = 100 ជួរ។"
+    correctIndex: 2,
+    standardAnswer: "CROSS JOIN បង្កើត Cartesian Product ដោយផ្គូផ្គងគ្រប់ Row ពីតារាងទីមួយ ជាមួយគ្រប់ Row ពីតារាងទីពីរ ដែលផ្ដល់ផលជា m × n = 5 × 10 = 50 Rows。"
   },
   {
     id: 11,
     chapter: "Lesson 10: Subqueries",
-    category: "subqueries",
-    question: "តើអ្វីទៅជា Subquery (ឬ Inner Query)?",
+    question: "តើអ្វីទៅជា Subquery? តើពេលណាត្រូវប្រើ Subquery?",
+    codeSnippet: "SELECT last_name, salary FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);",
     options: [
-      "ជា SELECT statement មួយដែលត្រូវបានសរសេរបង្កប់នៅខាងក្នុង SQL statement មួយទៀត",
-      "ជា Query ដែលដំណើរការតែនៅពេលមានកំហុស Error កើតឡើងប៉ុណ្ណោះ",
-      "ជា Procedure សម្រាប់លុបទិន្នន័យចេញពី Database",
-      "ជា View ពិសេសដែលមិនអាចកែប្រែទិន្នន័យបាន"
+      "ជា Query ដែលមានល្បឿនលឿនជាងគេក្នុង Database",
+      "ជា SELECT Statement មួយដែលត្រូវបានសរសេរបង្កប់នៅខាងក្នុង SQL Statement មួយផ្សេងទៀត",
+      "ជា Database Trigger សម្រាប់ចាប់កំហុស",
+      "ជាពាក្យបញ្ជាសម្រាប់បម្រុងទុកទិន្នន័យ (Backup)"
     ],
-    correctIndex: 0,
-    explanation: "Subquery គឺជា query ដែលសរសេរបង្កប់ខាងក្នុង statement មួយទៀត ដើម្បីទាញយកតម្លៃដែលមិនទាន់ដឹងជាមុន មកធ្វើជាលក្ខខណ្ឌសម្រាប់ Outer Query បន្ត។"
+    correctIndex: 1,
+    standardAnswer: "Subquery (Inner Query) គឺជា SELECT Statement ដែលបង្កប់ក្នុង SQL Statement មួយទៀត។ ប្រើនៅពេលដែល Query ចម្បងត្រូវការតម្លៃលទ្ធផលដែលមិនទាន់ស្គាល់ជាមុន ដើម្បីយកមកធ្វើជាលក្ខខណ្ឌចម្រាញ់ទិន្នន័យ。"
   },
   {
     id: 12,
     chapter: "Lesson 10: Subqueries",
-    category: "subqueries",
-    question: "តើ Single-row Subquery ផ្ដល់លទ្ធផលត្រឡប់មកវិញយ៉ាងដូចម្ដេច?",
+    question: "តើអ្វីទៅជា Single-row Subquery?",
+    codeSnippet: null,
     options: [
-      "ផ្ដល់លទ្ធផលត្រឹមតែ ១ ជួរ (One Row / Single Value) ប៉ុណ្ណោះ",
-      "ផ្ដល់លទ្ធផលច្រើនជួរ (Multiple Rows)",
-      "ផ្ដល់លទ្ធផលជា Table ទាំងមូលជានិច្ច",
-      "មិនផ្ដល់លទ្ធផលអ្វីទាំងអស់"
+      "ត្រឹមតែ 1 Row ប៉ុណ្ណោះ",
+      "យ៉ាងហោចណាស់ 2 Rows",
+      "ចំនួន Rows គ្មានដែនកំណត់",
+      "មិនផ្ដល់ទិន្នន័យត្រឡប់មកវិញឡើយ"
     ],
     correctIndex: 0,
-    explanation: "Single-row subquery គឺជា subquery ដែល execute រួចផ្ដល់លទ្ធផលត្រឡប់មកវិញត្រឹមតែ ១ ជួរ (One Row) គត់ ហើយប្រើប្រាស់ single-row operators ដូចជា =, >, <, >=, <=, <>។"
+    standardAnswer: "Single-row Subquery គឺជា Subquery ដែលដំណើរការរួចផ្ដល់លទ្ធផលត្រឡប់មកវិញត្រឹមតែ 1 Row ប៉ុណ្ណោះ ហើយប្រើជាមួយ single-row operators (=, >, <, <=, >=, <>)。"
   },
   {
     id: 13,
     chapter: "Lesson 10: Subqueries",
-    category: "subqueries",
-    question: "តើ Multiple-row Subqueries ត្រូវប្រើប្រាស់ Operators ជំនួយណាខ្លះ?",
+    question: "តើ Operator ណាខ្លះត្រូវបានប្រើសម្រាប់ Multiple-row Subqueries?",
+    codeSnippet: "SELECT last_name FROM employees WHERE department_id IN (SELECT department_id FROM departments WHERE location_id = 1700);",
     options: [
-      "IN, ANY, ALL",
       "=, >, <, <=",
+      "IN, ANY, ALL",
       "LIKE, BETWEEN, IS NULL",
       "AND, OR, NOT"
     ],
-    correctIndex: 0,
-    explanation: "Multiple-row subqueries ផ្ដល់លទ្ធផលច្រើនជួរ ដូច្នេះត្រូវប្រើ Multiple-row comparison operators ដូចជា IN (ស្មើនឹងតម្លៃណាមួយក្នុងបញ្ជី), ANY (ប្រៀបធៀបជាមួយតម្លៃនីមួយៗ), ឬ ALL (ប្រៀបធៀបជាមួយគ្រប់តម្លៃទាំងអស់)។"
+    correctIndex: 1,
+    standardAnswer: "Operators សម្រាប់ Multiple-row Subqueries រួមមាន៖ IN (ស្មើនឹងតម្លៃណាមួយក្នុង list), ANY (ប្រៀបធៀបជាមួយធាតុនីមួយៗ), និង ALL (ប្រៀបធៀបជាមួយគ្រប់ធាតុទាំងអស់)。"
   },
   {
     id: 14,
     chapter: "Lesson 10: Subqueries",
-    category: "subqueries",
-    question: "នៅក្នុងលក្ខខណ្ឌ `WHERE salary < ANY (SELECT salary FROM employees WHERE department_id = 60)` តើ `< ANY` មានន័យស្មើនឹងអ្វី?",
+    question: "នៅក្នុង Multiple-row Subquery តើ '< ANY' មានន័យដូចម្ដេច?",
+    codeSnippet: null,
     options: [
-      "តូចជាងតម្លៃអតិបរមា (Less than the maximum value)",
-      "តូចជាងតម្លៃអប្បបរមា (Less than the minimum value)",
-      "ធំជាងតម្លៃមធ្យម",
-      "ស្មើនឹងគ្រប់តម្លៃទាំងអស់"
+      "ធំជាងតម្លៃតូចបំផុត",
+      "តូចជាងតម្លៃអតិបរមា (Less than the maximum)",
+      "ស្មើនឹងតម្លៃទាំងអស់",
+      "តូចជាងតម្លៃអប្បបរមា"
     ],
-    correctIndex: 0,
-    explanation: "`< ANY` មានន័យថាតូចជាងតម្លៃណាមួយក្នុងចំណោមលទ្ធផល ដែលមានន័យជាក់ស្ដែងគឺ 'តូចជាងតម្លៃអតិបរមា (Less than the maximum)' នៃបញ្ជីនោះ។"
+    correctIndex: 1,
+    standardAnswer: "< ANY មានន័យថាតូចជាងតម្លៃអតិបរមា (Less than the maximum) នៃសំណុំតម្លៃដែល Subquery ផ្ដល់ឱ្យ。"
   },
   {
     id: 15,
     chapter: "Set Operators, DML, DDL & Naming Conventions",
-    category: "set_dml_ddl",
-    question: "តើ Set Operator មួយណាដែលច្របាច់បញ្ចូលលទ្ធផល queries ពីរ ដោយលុបទិន្នន័យស្ទួន (Duplicates) ចេញ និង Sort ទិន្នន័យស្វ័យប្រវត្តិ?",
+    question: "តើអ្វីទៅជា Set Operator ក្នុង Oracle SQL?",
+    codeSnippet: null,
     options: [
-      "UNION",
-      "UNION ALL",
-      "INTERSECT",
-      "MINUS"
+      "ពាក្យបញ្ជាបង្កើត Schema Object",
+      "Operator សម្រាប់រួមបញ្ចូលលទ្ធផលពី SELECT Queries ពីរ ឬច្រើន ឱ្យទៅជា Single Result Set តែមួយ",
+      "Function សម្រាប់គណនាផលបូកជួរដេក",
+      "Clause សម្រាប់ប្ដូរឈ្មោះ Column"
     ],
-    correctIndex: 0,
-    explanation: "UNION បញ្ចូលលទ្ធផល queries ពីរចូលគ្នា ដោយលុបទិន្នន័យស្ទួនចោល និង Sort ទិន្នន័យស្វ័យប្រវត្តិ។ ប្រសិនបើចង់រក្សាទុកស្ទួន និងមិន Sort ត្រូវប្រើ UNION ALL។"
+    correctIndex: 1,
+    standardAnswer: "Set Operator គឺជាពាក្យបញ្ជាដែលប្រើសម្រាប់រួមបញ្ចូល ឬច្របាច់លទ្ធផលពី SELECT Queries ពីរ ឬច្រើនឱ្យទៅជាលទ្ធផលតែមួយ (Single Result Set)。"
   },
   {
     id: 16,
     chapter: "Set Operators, DML, DDL & Naming Conventions",
-    category: "set_dml_ddl",
-    question: "តើមួយណាជា Rule ឬ Guideline ត្រឹមត្រូវក្នុងការប្រើប្រាស់ Set Operators?",
+    question: "ចូរនិយាយអំពី Rule ឬ Guideline ក្នុងការប្រើ Set Operator",
+    codeSnippet: null,
     options: [
-      "ORDER BY clause អាចប្រើប្រាស់បានតែនៅចុងបញ្ចប់នៃ query ចុងក្រោយបង្អស់ប៉ុណ្ណោះ",
-      "ចំនួន Columns ក្នុង queries នីមួយៗមិនចាំបាច់ស្មើគ្នាទេ",
-      "ឈ្មោះ Column នៃលទ្ធផលចុងក្រោយកំណត់យកតាម query ចុងក្រោយគេ",
-      "Data Type នៃ Columns អាចខុសគ្នាទាំងស្រុងបាន"
+      "Queries ត្រូវតែទាញចេញពី Table តែមួយប៉ុណ្ណោះ",
+      "Queries ត្រូវមានចំនួន Columns ស្មើគ្នា និងមាន Data Types ត្រូវគ្នា (compatible) តាមលំដាប់លំដោយ",
+      "តម្រូវឱ្យមាន Clause WHERE ដូចគ្នាទាំងស្រុង",
+      "អាចប្រើ ORDER BY នៅគ្រប់ query ទាំងអស់"
     ],
-    correctIndex: 0,
-    explanation: "វិធាន Set Operators៖ ចំនួន Columns ត្រូវស្មើគ្នា, Data Types ត្រូវ Compatible, ឈ្មោះ Column យកតាម query ទីមួយ ហើយ ORDER BY អាចដាក់បានតែនៅចុងបញ្ចប់នៃ query ចុងក្រោយបង្អស់ប៉ុណ្ណោះ។"
+    correctIndex: 1,
+    standardAnswer: "1. Queries ត្រូវមានចំនួន Columns ស្មើគ្នា\n2. Data Types របស់ Columns ត្រូវតែ Compatible តាមលំដាប់ពីឆ្វេងទៅស្ដាំ\n3. ឈ្មោះ Column ចុងក្រោយកំណត់យកតាម Query ទីមួយ\n4. ORDER BY Clause អាចដាក់បានតែនៅចុងបញ្ចប់នៃ Query ចុងក្រោយប៉ុណ្ណោះ"
   },
   {
     id: 17,
     chapter: "Set Operators, DML, DDL & Naming Conventions",
-    category: "set_dml_ddl",
-    question: "តើ MINUS operator ផ្ដល់លទ្ធផលយ៉ាងដូចម្ដេច?",
+    question: "ចូរនិយាយអំពីតួនាទីរបស់ Set Operators: UNION, INTERSECT, MINUS",
+    codeSnippet: null,
     options: [
-      "ជ្រើសរើសយកតែជួរទិន្នន័យដែលមាននៅក្នុង query ទីមួយ ប៉ុន្តែគ្មាននៅក្នុង query ទីពីរ",
-      "ជ្រើសរើសយកជួរទិន្នន័យដែលមានវត្តមានដូចគ្នាក្នុង queries ទាំងសងខាង",
-      "ច្របាច់បញ្ចូលគ្រប់ជួរទាំងអស់ដោយមិនលុបទិន្នន័យស្ទួន",
-      "គណនាផលដកនៃតម្លៃលេខក្នុង Columns"
+      "UNION ALL",
+      "UNION: បញ្ចូលលទ្ធផលលុប duplicates, INTERSECT: យកជួរដែលមានទាំងសងខាង, MINUS: យកជួរដែលមានក្នុង query ទីមួយតែគ្មានក្នុង query ទីពីរ",
+      "MINUS",
+      "CROSS JOIN"
     ],
-    correctIndex: 0,
-    explanation: "MINUS operator ត្រឡប់មកវិញនូវជួរទិន្នន័យណាដែលមានវត្តមាននៅក្នុង Query ទីមួយ ប៉ុន្តែមិនមាននៅក្នុង Query ទីពីរឡើយ (Query 1 MINUS Query 2)។"
+    correctIndex: 1,
+    standardAnswer: "• UNION: បញ្ចូលលទ្ធផលពី queries ទាំងពីរចូលគ្នា ដោយលុប Duplicate Rows ចោល និង sort ស្វ័យប្រវត្តិ (រក្សា duplicate ប្រើ UNION ALL)\n• INTERSECT: យកតែជួរណាដែលមានវត្តមានទាំងសងខាង\n• MINUS: យកតែជួរណាដែលមានក្នុង query ទីមួយ ប៉ុន្តែគ្មានក្នុង query ទីពីរ"
   },
   {
     id: 18,
     chapter: "Set Operators, DML, DDL & Naming Conventions",
-    category: "set_dml_ddl",
-    question: "តើពាក្យបញ្ជាខាងក្រោមនេះ មួយណាស្ថិតក្នុងក្រុម DML (Data Manipulation Language)?",
+    question: "តើពាក្យបញ្ជាណាខ្លះជា DML (Data Manipulation Language)?",
+    codeSnippet: null,
     options: [
+      "CREATE, ALTER, DROP",
       "INSERT, UPDATE, DELETE, MERGE",
-      "CREATE, ALTER, DROP, TRUNCATE",
       "GRANT, REVOKE",
-      "COMMIT, ROLLBACK, SAVEPOINT"
+      "COMMIT, ROLLBACK"
     ],
-    correctIndex: 0,
-    explanation: "DML (Data Manipulation Language) ប្រើសម្រាប់គ្រប់គ្រង និងកែប្រែទិន្នន័យក្នុងតារាង រួមមាន INSERT, UPDATE, DELETE, និង MERGE។"
+    correctIndex: 1,
+    standardAnswer: "DML (Data Manipulation Language) គឺជាពាក្យបញ្ជាសម្រាប់គ្រប់គ្រង និងកែប្រែទិន្នន័យក្នុង Table រួមមាន៖ INSERT, UPDATE, DELETE, និង MERGE。"
   },
   {
     id: 19,
     chapter: "Set Operators, DML, DDL & Naming Conventions",
-    category: "set_dml_ddl",
-    question: "តើ TRUNCATE និង DELETE ខុសគ្នាជាចម្បងយ៉ាងដូចម្ដេច?",
+    question: "ចូរប្រៀបធៀប TRUNCATE Statement និង DELETE Statement",
+    codeSnippet: null,
     options: [
-      "DELETE ជា DML អាច ROLLBACK បាន និងអាចប្រើ WHERE បាន; រីឯ TRUNCATE ជា DDL មិនអាច ROLLBACK បានទេ (Auto-commit) និងលុបគ្រប់ជួរទាំងអស់ដោយគ្មាន WHERE",
-      "TRUNCATE អាច ROLLBACK បាន ចំណែក DELETE មិនអាច ROLLBACK បានទេ",
-      "DELETE ដំណើរការលឿនជាង TRUNCATE ព្រោះមិនកត់ Log",
-      "TRUNCATE អាចប្រើប្រាស់ជាមួយ WHERE clause បាន"
+      "DELETE មិនអាច ROLLBACK បានទេ រីឯ TRUNCATE អាច ROLLBACK បាន",
+      "TRUNCATE ជា DDL មិនអាច ROLLBACK បាន និងលុបទិន្នន័យទាំងអស់យ៉ាងលឿន ចំណែក DELETE ជា DML អាច ROLLBACK បាន និងអាចប្រើ WHERE clause",
+      "DELETE ដំណើរការលឿនជាង TRUNCATE ព្រោះមិនកត់ចូល Log",
+      "TRUNCATE អាចប្រើ WHERE clause ដើម្បីជ្រើសរើសជួរលុបបាន"
     ],
-    correctIndex: 0,
-    explanation: "DELETE គឺជាភាសា DML (Row-by-row, អាច ROLLBACK, ប្រើ WHERE បាន)។ ចំណែក TRUNCATE គឺជាភាសា DDL (Auto-commit, កាត់ផ្តាច់ Storage Pages ភ្លាមៗ មិនអាច ROLLBACK, គ្មាន WHERE)។"
+    correctIndex: 1,
+    standardAnswer: "• DELETE Statement: ជា DML, អាច ROLLBACK បាន, ល្បឿនយឺតជាង (កត់ត្រា Log តាមជួរ), អាចប្រើ WHERE clause បាន。\n• TRUNCATE Statement: ជា DDL, មិនអាច ROLLBACK បាន (Auto-commit), ល្បឿនលឿនខ្លាំង, មិនអាចប្រើ WHERE clause បានទេ (លុបទិន្នន័យទាំងអស់ក្នុង table)。"
   },
   {
     id: 20,
     chapter: "Set Operators, DML, DDL & Naming Conventions",
-    category: "set_dml_ddl",
-    question: "តើ DCL (Data Control Language) រួមមានពាក្យបញ្ជាអ្វីខ្លះ?",
+    question: "តើពាក្យបញ្ជា DCL (Data Control Language) ប្រើសម្រាប់អ្វី?",
+    codeSnippet: null,
     options: [
-      "GRANT (ផ្ដល់សិទ្ធិ) និង REVOKE (ដកសិទ្ធិ)",
-      "COMMIT និង ROLLBACK",
-      "CREATE និង DROP",
-      "SELECT និង INSERT"
+      "សម្រាប់គ្រប់គ្រង Privileges និងសិទ្ធិចូលប្រើប្រាស់ Database Objects (GRANT និង REVOKE)",
+      "សម្រាប់បង្កើត និងលុប Database Tables",
+      "សម្រាប់កែប្រែទិន្នន័យលេខក្នុង Column",
+      "សម្រាប់ Commit និង Rollback Transactions"
     ],
     correctIndex: 0,
-    explanation: "DCL (Data Control Language) ប្រើសម្រាប់គ្រប់គ្រងសិទ្ធិ (Privileges) និងសុវត្ថិភាពចូលប្រើ Database Objects រួមមាន GRANT និង REVOKE។"
+    standardAnswer: "DCL ប្រើសម្រាប់គ្រប់គ្រងសិទ្ធិ (Privileges) និងសុវត្ថិភាពលើ Database Objects រួមមាន៖ GRANT (ផ្ដល់សិទ្ធិ) និង REVOKE (ដកសិទ្ធិត្រឡប់មកវិញ)。"
   },
   {
     id: 21,
     chapter: "Set Operators, DML, DDL & Naming Conventions",
-    category: "set_dml_ddl",
-    question: "យោងតាមស្ដង់ដារ Oracle Naming Conventions តើឈ្មោះ Object មួយណាដែលចាត់ទុកថាត្រឹមត្រូវ (Valid)?",
+    question: "តាម Oracle Naming Conventions តើប្រវែងអតិបរមាស្ដង់ដារនៃឈ្មោះ Object ក្នុងមេរៀនមានប៉ុន្មានតួអក្សរ?",
+    codeSnippet: null,
     options: [
-      "emp_dept_30",
-      "1st_department (ផ្ដើមដោយលេខ)",
-      "SELECT (យក Reserved Word មកដាក់)",
-      "department_salary_summary_report_for_all_employees (លើសពី 30 តួអក្សរ)"
+      "១ ដល់ ៨ តួអក្សរ",
+      "១ ដល់ ៣០ តួអក្សរ (Characters)",
+      "រហូតដល់ ២៥៥ តួអក្សរ",
+      "គ្មានកំណត់ប្រវែងឡើយ"
     ],
-    correctIndex: 0,
-    explanation: "តាមស្តង់ដារ Oracle SQL ឈ្មោះ Object ត្រូវចាប់ផ្ដើមដោយតួអក្សរ (A-Z), មានប្រវែងពី ១ ដល់ ៣០ តួអក្សរ, មិនស្ទួនជាមួយ Reserved Words, និងអាចប្រើលេខ 0-9 ព្រមទាំងសញ្ញា _, $, # បាន។ ដូច្នេះ `emp_dept_30` គឺត្រឹមត្រូវ។"
+    correctIndex: 1,
+    standardAnswer: "តាមគោលការណ៍ Naming Convention របស់ Oracle SQL៖ ត្រូវចាប់ផ្ដើមដោយតួអក្សរ (A-Z), ប្រវែងពី ១ ដល់ ៣០ តួអក្សរ, អាចប្រើតែ A-Z, a-z, 0-9, _, $, #, មិនត្រូវស្ទួនឈ្មោះ object ផ្សេងទៀត, និងមិនត្រូវប្រើ Oracle Reserved Words。"
   },
   {
     id: 22,
     chapter: "Set Operators, DML, DDL & Naming Conventions",
-    category: "set_dml_ddl",
-    question: "តើពាក្យបញ្ជា DDL (Data Definition Language) មានលក្ខណៈពិសេសចម្បងអ្វីខ្លះ?",
+    question: "តើអ្វីជាលក្ខណៈពិសេសចម្បងនៃ DDL Statements (ដូចជា CREATE, ALTER, DROP)?",
+    codeSnippet: null,
     options: [
-      "ប្រើសម្រាប់បង្កើត កែប្រែ ឬលុបរចនាសម្ព័ន្ធ (Structure/Schema) និងមានលក្ខណៈ Auto-commit (Implicit Commit) ដោយស្វ័យប្រវត្តិ",
-      "ប្រើសម្រាប់ទាញយកទិន្នន័យមកបង្ហាញតែប៉ុណ្ណោះ",
-      "រាល់ពេល execute រួច តម្រូវឱ្យសរសេរ COMMIT ដោយផ្ទាល់ទើបទិន្នន័យរក្សាទុក",
-      "អាចធ្វើការ ROLLBACK ត្រឡប់ក្រោយវិញបានយ៉ាងងាយស្រួល"
+      "អាចប្រើ ROLLBACK ដើម្បីត្រឡប់ថយក្រោយបានគ្រប់ពេល",
+      "មាន Implicit Commit (Auto-commit) ដោយស្វ័យប្រវត្តិ មិនអាច Rollback បានទេ",
+      "ដំណើរការតែនៅពេលមានការអនុញ្ញាតពី User ផ្សេងទៀតប៉ុណ្ណោះ",
+      "មិនអាចផ្លាស់ប្តូរ Structure របស់ Table បានទេ"
     ],
-    correctIndex: 0,
-    explanation: "DDL statements (CREATE, ALTER, DROP, TRUNCATE, RENAME) ប្រើសម្រាប់គ្រប់គ្រងរចនាសម្ព័ន្ធ Table/Schema ហើយមានលក្ខណៈ Implicit Commit (Auto-commit) ដោយស្វ័យប្រវត្តិ មិនអាច ROLLBACK បានឡើយ។"
+    correctIndex: 1,
+    standardAnswer: "រាល់ DDL Statements (CREATE, ALTER, DROP, TRUNCATE, RENAME) ទាំងអស់សុទ្ធតែមានលក្ខណៈ Implicit Commit (Auto-commit) ដោយស្វ័យប្រវត្តិ មិនអាចប្រើ ROLLBACK បានឡើយ。"
   }
 ];

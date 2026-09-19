@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '../components/Navbar';
 import { StatsBanner } from '../components/StatsBanner';
 import { SearchAndFilters } from '../components/SearchAndFilters';
@@ -10,10 +11,11 @@ import { QuickQuizModal } from '../components/QuickQuizModal';
 import { KeyboardShortcutsModal } from '../components/KeyboardShortcutsModal';
 import { Footer } from '../components/Footer';
 import { ToastContainer, ToastMessage } from '../components/Toast';
-import { MCQQuizView } from '../components/MCQQuizView';
+import { PracticeModeView } from '../components/PracticeModeView';
+import { WrittenExamModeView } from '../components/WrittenExamModeView';
 import { examQuestions, CHAPTER_LIST } from '../data/examQuestions';
 import { ChapterFilter, StatusFilter, ExamQuestion, ActivePlatformTab } from '../types/exam';
-import { Filter, Trophy, Layers } from 'lucide-react';
+import { Filter, Trophy, Clock, Layers } from 'lucide-react';
 
 export default function ExamReviewHome() {
   // --- Active Tab ---
@@ -254,144 +256,189 @@ export default function ExamReviewHome() {
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
-        {/* Conditional View: Study Guide vs Interactive MCQ Quiz */}
-        {activeTab === 'mcq_test' ? (
-          <MCQQuizView
-            onSwitchToStudyGuide={() => setActiveTab('study_guide')}
-            onOpenFlashcards={() => setIsFlashcardOpen(true)}
-          />
-        ) : (
-          <>
-            {/* Architectural Minimal Top Header */}
-            <div className="mb-2 pt-2">
-              <div className="text-[11px] font-mono font-bold tracking-[0.25em] text-[#2563EB] uppercase mb-2">
-                [ 01 // ORACLE DATABASE ARCHITECTURE ]
+        {/* Animated View Transition Container */}
+        <AnimatePresence mode="wait">
+          {activeTab === 'exam_mode' ? (
+            <motion.div
+              key="exam_mode"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <WrittenExamModeView
+                onSwitchToPractice={() => setActiveTab('practice')}
+                onSwitchToStudyGuide={() => setActiveTab('study_guide')}
+              />
+            </motion.div>
+          ) : activeTab === 'practice' ? (
+            <motion.div
+              key="practice"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <PracticeModeView
+                onSwitchToStudyGuide={() => setActiveTab('study_guide')}
+                onOpenFlashcards={() => setIsFlashcardOpen(true)}
+                onSwitchToExamMode={() => setActiveTab('exam_mode')}
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="study_guide"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-6"
+            >
+              {/* Architectural Minimal Top Header */}
+              <div className="mb-2 pt-2">
+                <div className="text-[11px] font-mono font-bold tracking-[0.25em] text-[#2563EB] uppercase mb-2">
+                  [ 01 // ORACLE DATABASE ARCHITECTURE ]
+                </div>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                  <div>
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 uppercase tracking-tight">
+                      Oracle SQL Exam Review
+                    </h1>
+                    <p className="text-slate-600 text-sm sm:text-base mt-1.5 font-normal max-w-3xl">
+                      Comprehensive study bank for SETEC Year III DBMS. Master standard theory, joins, subqueries, group functions, set operators, and DDL/DML commands.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.96 }}
+                      onClick={() => setActiveTab('practice')} 
+                      className="px-4 py-2.5 rounded-full bg-[#F97316] hover:bg-[#EA580C] text-white font-bold text-xs tracking-wider uppercase transition-all shadow-[0_10px_24px_rgba(249,115,22,0.25)] flex items-center gap-2 cursor-pointer"
+                    >
+                      <Trophy className="w-4 h-4" strokeWidth={1.75} />
+                      <span>Practice MCQ</span>
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.96 }}
+                      onClick={() => setActiveTab('exam_mode')} 
+                      className="px-4 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs tracking-wider uppercase transition-all shadow-xs flex items-center gap-2 cursor-pointer"
+                    >
+                      <Clock className="w-4 h-4 text-[#F97316]" strokeWidth={1.75} />
+                      <span>Exam Mode (90M)</span>
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.96 }}
+                      onClick={() => setIsFlashcardOpen(true)} 
+                      className="px-3.5 py-2.5 rounded-full bg-white border border-slate-200 hover:border-slate-300 text-slate-800 font-semibold text-xs tracking-wider uppercase flex items-center gap-1.5 transition-all cursor-pointer"
+                    >
+                      <Layers className="w-4 h-4" strokeWidth={1.75} />
+                      <span>Flashcards</span>
+                    </motion.button>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+
+              {/* Mastered Progress Bar & Status Pill Filters */}
+              <StatsBanner
+                total={examQuestions.length}
+                masteredCount={masteredIds.size}
+                bookmarkedCount={bookmarkedIds.size}
+                activeStatusFilter={activeStatusFilter}
+                onSelectStatusFilter={setActiveStatusFilter}
+                onResetProgress={handleResetProgress}
+              />
+
+              {/* Search, Chapters, and Controls */}
+              <SearchAndFilters
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                activeChapter={activeChapter}
+                onSelectChapter={setActiveChapter}
+                chapterCounts={chapterCounts}
+                onExpandAll={handleExpandAll}
+                onCollapseAll={handleCollapseAll}
+                allExpanded={allExpanded}
+                onShuffle={handleShuffle}
+                searchInputRef={searchInputRef}
+              />
+
+              {/* Active Results Summary */}
+              <div className="flex items-center justify-between text-xs sm:text-sm text-slate-500 px-1 font-mono">
                 <div>
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 uppercase tracking-tight">
-                    Oracle SQL Exam Review
-                  </h1>
-                  <p className="text-slate-600 text-sm sm:text-base mt-1.5 font-normal max-w-3xl">
-                    Comprehensive study bank for SETEC Year III DBMS. Master standard theory, joins, subqueries, group functions, set operators, and DDL/DML commands.
-                  </p>
+                  SHOWING <strong className="text-slate-900 font-semibold">{filteredQuestions.length}</strong> OF {examQuestions.length} QUESTIONS
+                  {activeChapter !== 'All' && (
+                    <span> IN <strong className="text-[#2563EB]">{activeChapter}</strong></span>
+                  )}
+                  {activeStatusFilter !== 'all' && (
+                    <span> (FILTER: <span className="font-semibold text-[#F97316] uppercase">[{activeStatusFilter}]</span>)</span>
+                  )}
                 </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  <button 
-                    onClick={() => setActiveTab('mcq_test')} 
-                    className="px-5 py-2.5 rounded-full bg-[#FF5722] hover:bg-[#FF6B2C] text-white font-bold text-xs tracking-wider uppercase transition-all shadow-[0_10px_24px_rgba(255,87,34,0.25)] active:scale-95 flex items-center gap-2 cursor-pointer"
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="text-[#2563EB] hover:text-[#F97316] hover:underline font-medium cursor-pointer uppercase text-xs"
                   >
-                    <Trophy className="w-4 h-4" strokeWidth={1.75} />
-                    <span>Start MCQ Quiz</span>
+                    [ Clear Search ]
                   </button>
-                  <button 
-                    onClick={() => setIsFlashcardOpen(true)} 
-                    className="px-4 py-2.5 rounded-full bg-white border border-slate-200 hover:border-slate-300 text-slate-800 font-semibold text-xs tracking-wider uppercase flex items-center gap-2 transition-all cursor-pointer"
-                  >
-                    <Layers className="w-4 h-4" strokeWidth={1.75} />
-                    <span>Flashcards</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Mastered Progress Bar & Status Pill Filters */}
-            <StatsBanner
-              total={examQuestions.length}
-              masteredCount={masteredIds.size}
-              bookmarkedCount={bookmarkedIds.size}
-              activeStatusFilter={activeStatusFilter}
-              onSelectStatusFilter={setActiveStatusFilter}
-              onResetProgress={handleResetProgress}
-            />
-
-            {/* Search, Chapters, and Controls */}
-            <SearchAndFilters
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              activeChapter={activeChapter}
-              onSelectChapter={setActiveChapter}
-              chapterCounts={chapterCounts}
-              onExpandAll={handleExpandAll}
-              onCollapseAll={handleCollapseAll}
-              allExpanded={allExpanded}
-              onShuffle={handleShuffle}
-              searchInputRef={searchInputRef}
-            />
-
-            {/* Active Results Summary */}
-            <div className="flex items-center justify-between text-xs sm:text-sm text-slate-500 px-1 font-mono">
-              <div>
-                SHOWING <strong className="text-slate-900 font-semibold">{filteredQuestions.length}</strong> OF {examQuestions.length} QUESTIONS
-                {activeChapter !== 'All' && (
-                  <span> IN <strong className="text-[#2563EB]">{activeChapter}</strong></span>
-                )}
-                {activeStatusFilter !== 'all' && (
-                  <span> (FILTER: <span className="font-semibold text-[#FF5722] uppercase">[{activeStatusFilter}]</span>)</span>
                 )}
               </div>
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="text-[#2563EB] hover:text-[#FF5722] hover:underline font-medium cursor-pointer uppercase text-xs"
-                >
-                  [ Clear Search ]
-                </button>
+
+              {/* Questions Grid / List */}
+              {filteredQuestions.length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:gap-5">
+                  {filteredQuestions.map((q) => (
+                    <QuestionCard
+                      key={q.id}
+                      question={q}
+                      isExpanded={expandedIds.has(q.id)}
+                      onToggleExpand={handleToggleExpand}
+                      isMastered={masteredIds.has(q.id)}
+                      onToggleMastered={handleToggleMastered}
+                      isBookmarked={bookmarkedIds.has(q.id)}
+                      onToggleBookmark={handleToggleBookmark}
+                      onCopySuccess={(msg) => showToast(msg, undefined, 'success')}
+                      searchQuery={searchQuery}
+                    />
+                  ))}
+                </div>
+              ) : (
+                /* Empty State */
+                <div className="p-12 text-center rounded-3xl bg-white border border-slate-200/90 space-y-4 shadow-sm">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
+                    <Filter className="w-6 h-6" strokeWidth={1.75} />
+                  </div>
+                  <div className="space-y-1 max-w-md mx-auto">
+                    <h3 className="text-base font-bold text-slate-900">
+                      រកមិនឃើញសំណួរត្រូវនឹងលក្ខខណ្ឌស្វែងរកឡើយ
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      សូមសាកល្បងផ្លាស់ប្តូរពាក្យគន្លឹះ ឬជ្រើសរើសជំពូក (Chapter) ផ្សេងទៀត។
+                    </p>
+                  </div>
+                  <motion.button
+                    whileTap={{ scale: 0.96 }}
+                    onClick={() => {
+                      setSearchQuery('');
+                      setActiveChapter('All');
+                      setActiveStatusFilter('all');
+                    }}
+                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider shadow-xs transition-colors cursor-pointer font-mono"
+                  >
+                    Reset All Filters
+                  </motion.button>
+                </div>
               )}
-            </div>
-
-            {/* Questions Grid / List */}
-            {filteredQuestions.length > 0 ? (
-              <div className="grid grid-cols-1 gap-4 sm:gap-5">
-                {filteredQuestions.map((q) => (
-                  <QuestionCard
-                    key={q.id}
-                    question={q}
-                    isExpanded={expandedIds.has(q.id)}
-                    onToggleExpand={handleToggleExpand}
-                    isMastered={masteredIds.has(q.id)}
-                    onToggleMastered={handleToggleMastered}
-                    isBookmarked={bookmarkedIds.has(q.id)}
-                    onToggleBookmark={handleToggleBookmark}
-                    onCopySuccess={(msg) => showToast(msg, undefined, 'success')}
-                    searchQuery={searchQuery}
-                  />
-                ))}
-              </div>
-            ) : (
-              /* Empty State */
-              <div className="p-12 text-center rounded-3xl bg-white border border-slate-200/90 space-y-4 shadow-sm">
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
-                  <Filter className="w-6 h-6" strokeWidth={1.75} />
-                </div>
-                <div className="space-y-1 max-w-md mx-auto">
-                  <h3 className="text-base font-bold text-slate-900">
-                    រកមិនឃើញសំណួរត្រូវនឹងលក្ខខណ្ឌស្វែងរកឡើយ
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    សូមសាកល្បងផ្លាស់ប្តូរពាក្យគន្លឹះ ឬជ្រើសរើសជំពូក (Chapter) ផ្សេងទៀត។
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    setActiveChapter('All');
-                    setActiveStatusFilter('all');
-                  }}
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider shadow-xs transition-colors cursor-pointer"
-                >
-                  Reset All Filters
-                </button>
-              </div>
-            )}
-          </>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Modals */}
+      {/* Modals with Framer Motion AnimatePresence */}
       <FlashcardModal
         isOpen={isFlashcardOpen}
         onClose={() => setIsFlashcardOpen(false)}
